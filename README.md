@@ -1,22 +1,30 @@
 # Suspects & Storytellers: Scribble & Bluff (online)
 
-Real-time multiplayer. Each player uses their own phone or laptop. The server keeps the game state and
-sends every player only their own secret (the Impostor never receives the word until the round is over).
+Real-time multiplayer party game. Each player uses their own phone or laptop.
+
+## How a round works
+1. Everyone privately sees their role and word. Regular players share ONE word; the Impostor gets a different,
+   unrelated word (from a different category). Words are only sent to the player they belong to.
+2. Players draw one at a time, in room order, each with a countdown. Submitting (or running out of time) moves to the
+   next player. Submitted drawings appear for everyone straight away. Disconnected or stuck players are skipped.
+3. Discussion with a synced timer, a drawing gallery and the room chat.
+4. Secret voting with a timer (chat paused). Ties let the Impostor escape.
+5. Reveal, Impostor's final guess (of the group word), funniest-entry vote, recap with both words, 3 rounds, final results.
+Scoring is unchanged: +100 per correct vote, +200 Impostor escapes, +150 correct final guess, +50 funniest entry.
+
+## Settings (host, in the lobby)
+Drawing time per turn, discussion time, voting time.
 
 ## Run locally
     npm install
     npm start
-Open http://localhost:3000 in two or more browser windows (or phones on the same Wi-Fi: http://YOUR-PC-IP:3000).
+Open http://localhost:3000 in several windows or phones on the same Wi-Fi.
 
-## Put it online (free): Render
-1. Push this folder to a GitHub repo.
-2. render.com > New > Web Service > connect the repo. (render.yaml is included, so settings fill in themselves.)
-   Build command: npm install   Start command: npm start
-3. Open the https://....onrender.com link and share it. Free instances sleep when idle; the first load can take ~30s.
-Railway, Fly.io, Glitch or any Node host work the same way. Netlify/Vercel static hosting will NOT work:
-they cannot keep WebSocket connections open.
+## Deploy (free): Render
+Push to GitHub, then render.com > New > Web Service > pick the repo (render.yaml is included).
+Build: npm install   Start: npm start. Netlify/Vercel static hosting cannot run this server (WebSockets).
+Rooms live in memory, so run a single instance; a restart ends running games.
 
-## Notes
-- Rooms live in server memory. Restarting the server ends all games. Run a single instance.
-- Players who refresh or lose connection rejoin automatically (token stored in the browser).
-- Invite link format: https://YOUR-SITE/?room=ABCD
+## Chat rules (enforced on the server)
+Room members only, 200 characters max, 0.7 s between messages, duplicates ignored, history of the last 100 messages
+replayed on reconnect, paused during voting. Messages are rendered as plain text.

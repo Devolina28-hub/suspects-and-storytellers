@@ -114,11 +114,24 @@ input{width:100%;padding:.65em .9em;border:3px solid var(--k);border-radius:12px
 @media(max-width:800px){.hero,.lob{grid-template-columns:1fr}.avs{grid-template-columns:repeat(4,1fr)}.pill{font-size:.8rem}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 .pl.off{opacity:.55}.pl small{font-weight:800}
+.order,.status{display:flex;gap:8px;flex-wrap:wrap}.oc{display:inline-flex;align-items:center;gap:3px;opacity:.5}.oc.done{opacity:1}.oc.now{opacity:1;outline:3px solid var(--y);outline-offset:3px;border-radius:50%}.oc i{font-style:normal;font-weight:800}
+.nodraw{display:grid;place-items:center;min-height:120px;background:#FFFDF7;border-bottom:3px solid var(--k);font-weight:700;color:#6b648c}
+select{font:inherit;padding:.4em .6em;border:3px solid var(--k);border-radius:10px;background:#fff;color:var(--k)}
+input[type=range]{padding:0;border:0;background:none;width:130px}
+.cfgr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0}.cfgr label{margin:0}
+#cb{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:30}
+#cp{position:fixed;right:14px;bottom:calc(64px + env(safe-area-inset-bottom,0px));width:min(360px,calc(100vw - 28px));height:min(420px,60vh);display:flex;flex-direction:column;z-index:30;background:var(--w);color:var(--k);border:3px solid var(--k);border-radius:18px;box-shadow:0 6px 0 var(--k)}
+#cp[hidden]{display:none}.ch{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:3px solid var(--k);background:var(--y);border-radius:14px 14px 0 0}
+#cl{flex:1;overflow-y:auto;padding:10px;display:grid;align-content:start;gap:8px}.empty{opacity:.7;text-align:center;margin-top:30px}
+.m{background:#fff;border:2px solid var(--k);border-radius:12px;padding:4px 10px;max-width:92%}.m.me{background:var(--m);justify-self:end}.m p{margin:0;overflow-wrap:anywhere}.m small{opacity:.7}
+#chf{display:flex;gap:8px;padding:8px;border-top:3px solid var(--k)}#chf input{flex:1;min-width:0}
 </style>
 </head>
 <body>
 <header class="top"><span class="logo" data-a="home" role="button" tabindex="0">S&amp;S</span><span class="pill" id="pill" hidden></span><button class="snd" id="snd" data-a="snd" aria-label="Sound off" title="Sound">🔇</button></header>
 <main id="app"></main>
+<button class="btn s b" id="cb" data-a="chat" hidden aria-expanded="false">💬 Chat <span id="cn"></span></button>
+<aside id="cp" hidden aria-label="Room chat"><div class="ch"><b>Room chat</b><button class="x" data-a="chat" aria-label="Close chat">×</button></div><div id="cl" aria-live="polite"><p class="empty">No messages yet. Say hi!</p></div><form id="chf" novalidate><input id="ci" maxlength="200" autocomplete="off" placeholder="Type a message" aria-label="Chat message"><button class="btn m s">Send</button></form></aside>
 <script src="/socket.io/socket.io.js"></script>
 <script src="app.js"></script>
 </body>
